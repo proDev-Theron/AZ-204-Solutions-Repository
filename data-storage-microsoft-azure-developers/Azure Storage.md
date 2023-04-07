@@ -8,3 +8,10 @@ az storage account create \
   --name <name>
 ```
 
+## Create a .NET Core Application
+Not providing the name of the app will create files in the current directory. If you provide the name of the app, cd to that new folder. Use `dotnet run` to run the application.
+`dotnet new console --name <NameOfTheApp>`
+
+## Add a Azure Storage NuGet package
+Azure.Storage.Blobs in this example
+`dotnet add package Azure.Storage.Blobs`
