@@ -13,7 +13,7 @@ az storage account create \
 Not providing the name of the app will create files in the current directory. If you provide the name of the app, cd to that new folder. Use `dotnet run` to run the application.
 `dotnet new console --name <NameOfTheApp>`
 
-## Add a Azure Storage NuGet package
+## Add the Azure Storage NuGet package
 Azure.Storage.Blobs in this example
 `dotnet add package Azure.Storage.Blobs`
 
@@ -70,4 +70,113 @@ using System.IO;
         }
     }
 
+```
+
+## Add code to Connect your application to your Azure Storage account
+Edit Program.cs
+```
+//Add this import you downloaded from NuGet earlier
+using Azure.Storage.Blobs;
+
+// create the BlobContainerClient object in the main section of the program
+var connectionString = configuration.GetConnectionString("StorageAccount");
+string containerName = "photos";
+
+BlobContainerClient container = new BlobContainerClient(connectionString, containerName);
+
+//At this point, the client library has not attempted to connect to Azure or validate the connection string and access key being used. It has simply constructed a lightweight client object used to perform operations against Azure Blob Storage. Only when an operation is invoked against the storage account will a network call be made.
+container.CreateIfNotExists();
+```
+
+The whole Program.cs will look like this now:
+```
+using System;    
+using Microsoft.Extensions.Configuration;
+using System.IO;
+using Azure.Storage.Blobs;
+
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json");
+
+            var configuration = builder.Build();
+
+            var connectionString = configuration.GetConnectionString("StorageAccount");
+            string containerName = "photos";
+
+            BlobContainerClient container = new BlobContainerClient(connectionString, containerName);
+
+            container.CreateIfNotExists();
+        }
+    }
+
+```
+
+# Upload an image to an Azure Storage account
+To work with individual blob objects in your Azure Storage account, you use a BlobClient object. To get a BlobClient object is, call the GetBlobClient method on the BlobContainerClient object of the container where the blob will be stored. When calling the GetBlobClient method, you also supply a name for the blob in the container. For our example, the name of the blob will be the same as the name of our file.
+
+```
+string blobName = "docs-and-friends-selfie-stick";
+string fileName = "docs-and-friends-selfie-stick.png";
+BlobClient blobClient = container.GetBlobClient(blobName);
+blobClient.Upload(fileName, true);
+```
+The second argument in the Upload method specifies if an existing blob object with the same name can be overwritten. By default, this value is false. In this case, we're specifying true to allow the program to be run multiple times.
+
+## List objects in an Azure Blob Storage container
+```
+var blobs = container.GetBlobs();
+foreach (var blob in blobs)
+{
+    Console.WriteLine($"{blob.Name} --> Created On: {blob.Properties.CreatedOn:yyyy-MM-dd HH:mm:ss}  Size: {blob.Properties.ContentLength}");
+}
+```
+
+## Final Program.cs should look like this:
+```
+using System;
+using Microsoft.Extensions.Configuration;
+using System.IO;
+using Azure.Storage.Blobs;
+
+namespace PhotoSharingApp
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json");
+
+            var configuration = builder.Build();
+
+            // Get a connection string to our Azure Storage account.
+            var connectionString = configuration.GetConnectionString("StorageAccount");
+
+            // Get a reference to the container client object so you can create the "photos" container
+            string containerName = "photos";
+            BlobContainerClient container = new BlobContainerClient(connectionString, containerName);
+            container.CreateIfNotExists();
+
+            // Uploads the image to Blob storage.  If a blb already exists with this name it will be overwritten
+            string blobName = "docs-and-friends-selfie-stick";
+            string fileName = "docs-and-friends-selfie-stick.png";
+            BlobClient blobClient = container.GetBlobClient(blobName);
+            blobClient.Upload(fileName, true);
+
+            // List out all the blobs in the container
+            var blobs = container.GetBlobs();
+            foreach (var blob in blobs)
+            {
+                Console.WriteLine($"{blob.Name} --> Created On: {blob.Properties.CreatedOn:yyyy-MM-dd HH:mm:ss}  Size: {blob.Properties.ContentLength}");
+            }
+        }
+    }
+}
 ```
