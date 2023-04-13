@@ -33,3 +33,19 @@ git clone https://github.com/MicrosoftDocs/mslearn-connect-services-together.git
 1. In the Cloud Shell editor, open privatemessagesender/Program.cs and locate the following line of code:
 `const string ServiceBusConnectionString = "";`
 Paste the connection string between the quotation marks.
+2. Fill in the missing code. You can use the comments as guide.
+3. `cd` to the `privatemessagesender` folder and use `dotnet run` to run the program and send a message to the queue.
+4. When the app is finished running, run this command below to see how many messages are in the queue.
+```
+az servicebus queue show \
+    --resource-group learn-f5d1d94c-9ea3-48fb-bf9c-4144fd040d9f \
+    --name salesmessages \
+    --query messageCount \
+    --namespace-name <namespace-name>
+```
+5. Each time you run the dotnet app, a new message is added to the queue. You'll see the messageCount increase each time you run the Azure command.
+
+## Write code to receive messages from the queue
+1. In the editor, open privatemessagereceiver/Program.cs and find the following line of code:
+`const string ServiceBusConnectionString = "";`
+2. Fill in the missing code. You can use the comments as guide.
