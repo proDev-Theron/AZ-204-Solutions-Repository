@@ -49,3 +49,13 @@ az servicebus queue show \
 1. In the editor, open privatemessagereceiver/Program.cs and find the following line of code:
 `const string ServiceBusConnectionString = "";`
 2. Fill in the missing code. You can use the comments as guide.
+3. `cd` to the `privatemessagereceiver` folder and use `dotnet run` to run the program and receive the message/s from the queue.
+4. When the app is finished running, run this command below to see how many messages are in the queue.
+```
+az servicebus queue show \
+    --resource-group learn-f5d1d94c-9ea3-48fb-bf9c-4144fd040d9f \
+    --name salesmessages \
+    --query messageCount \
+    --namespace-name <namespace-name>
+```
+The output will be `0` if all the messages have been removed.
