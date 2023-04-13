@@ -1,5 +1,5 @@
-# Send and receive messages by using a queue
-First create a queue under a service bus namespace. I created mine using Azure portal and put the service bus namespace under a resource group.
+# Send and receive messages by using a topic
+First create a topic under a service bus namespace. I created mine using Azure portal and put the service bus namespace under a resource group.
 
 ## Get the connection string to the Service Bus namespace
 You must configure two pieces of information in your two console apps to access your Service Bus namespace and to use the queue within that namespace:
@@ -29,8 +29,8 @@ cd ~
 git clone https://github.com/MicrosoftDocs/mslearn-connect-services-together.git
 ```
 
-## Write code to send a message to a queue
-1. In the Cloud Shell editor, open privatemessagesender/Program.cs and locate the following line of code:
+## Write code to send a message to a topic
+1. In the Azure Cloud Shell editor, open `performancemessagesender/Program.cs` and find the following line of code:
 `const string ServiceBusConnectionString = "";`
 Paste the connection string between the quotation marks.
 2. Fill in the missing code. You can use the comments as guide.
