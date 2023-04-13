@@ -50,13 +50,15 @@ az servicebus topic subscription show \
 1. In the editor, open `performancemessagereceiver/Program.cs` and find the following line of code:
 `const string ServiceBusConnectionString = "";`
 2. Fill in the missing code. You can use the comments as guide.
-3. `cd` to the `performancemessagereceiver` folder and use `dotnet run` to run the program and receive the message/s from the queue.
-4. When the app is finished running, run this command below to see how many messages are in the queue.
+3. `cd` to the `performancemessagereceiver` folder and use `dotnet run` to run the program and receive the message/s from the topic subscription "Americas".
+4. When the app is finished running, run this command below to see how many messages are in the topic.
 ```
-az servicebus queue show \
-    --resource-group learn-f5d1d94c-9ea3-48fb-bf9c-4144fd040d9f \
-    --name salesmessages \
-    --query messageCount \
-    --namespace-name <namespace-name>
+az servicebus topic subscription show \
+     --resource-group learn-f5d1d94c-9ea3-48fb-bf9c-4144fd040d9f \
+     --topic-name salesperformancemessages \
+     --name Americas \
+     --query messageCount \
+     --namespace-name <namespace-name> \
 ```
-The output will be `0` if all the messages have been removed.
+The output will be `0` if all the messages have been removed in "Americas". 
+If you replace Americas with EuropeAndAsia in this code to see the current message count for the `EuropeAndAsia` subscription, you'll see that the message count is still there. In the preceding code, only Americas was set to retrieve topic messages, so that message is still waiting for EuropeAndAsia to retrieve it.
