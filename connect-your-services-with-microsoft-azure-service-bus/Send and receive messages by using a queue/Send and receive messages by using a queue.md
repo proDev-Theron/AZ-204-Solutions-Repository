@@ -19,3 +19,17 @@ az servicebus namespace authorization-rule keys list \
 The last line in the response is the connection string, which contains the endpoint for your namespace and the shared access key. It should resemble the following example:
 `Endpoint=sb://testtesttesttest1.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=T3toDz2VMFnE2c4hgLiRC3JtrdwUh08uB+ASbEd9voE=
 `
+
+## Clone and open the starter application
+In a production application, you should use a configuration file or Azure Key Vault to store the connection string.
+
+- Clone the git project using Azure Shell
+```
+cd ~
+git clone https://github.com/MicrosoftDocs/mslearn-connect-services-together.git
+```
+
+## Write code to send a message to a queue
+1. In the Cloud Shell editor, open privatemessagesender/Program.cs and locate the following line of code:
+`const string ServiceBusConnectionString = "";`
+Paste the connection string between the quotation marks.
