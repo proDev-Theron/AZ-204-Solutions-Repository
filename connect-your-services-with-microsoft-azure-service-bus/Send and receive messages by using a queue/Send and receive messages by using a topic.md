@@ -34,22 +34,23 @@ git clone https://github.com/MicrosoftDocs/mslearn-connect-services-together.git
 `const string ServiceBusConnectionString = "";`
 Paste the connection string between the quotation marks.
 2. Fill in the missing code. You can use the comments as guide.
-3. `cd` to the `privatemessagesender` folder and use `dotnet run` to run the program and send a message to the queue.
-4. When the app is finished running, run this command below to see how many messages are in the queue.
+3. `cd` to the `performancemessagesender` folder and use `dotnet run` to run the program and send a message to the queue.
+4. When the app is finished running, run this command below to see how many messages are in the topic. You can also go the Azure portal to check it visually.
 ```
-az servicebus queue show \
+az servicebus topic subscription show \
     --resource-group learn-f5d1d94c-9ea3-48fb-bf9c-4144fd040d9f \
-    --name salesmessages \
+    --topic-name salesperformancemessages \
+    --name Americas \
     --query messageCount \
     --namespace-name <namespace-name>
 ```
-5. Each time you run the dotnet app, a new message is added to the queue. You'll see the messageCount increase each time you run the Azure command.
+5. If you replace Americas with EuropeAndAsia and run the command again, you'll see that both subscriptions have the same number of messages.
 
-## Write code to receive messages from the queue
-1. In the editor, open privatemessagereceiver/Program.cs and find the following line of code:
+## Write code to retrieve a topic message for a subscription
+1. In the editor, open `performancemessagereceiver/Program.cs` and find the following line of code:
 `const string ServiceBusConnectionString = "";`
 2. Fill in the missing code. You can use the comments as guide.
-3. `cd` to the `privatemessagereceiver` folder and use `dotnet run` to run the program and receive the message/s from the queue.
+3. `cd` to the `performancemessagereceiver` folder and use `dotnet run` to run the program and receive the message/s from the queue.
 4. When the app is finished running, run this command below to see how many messages are in the queue.
 ```
 az servicebus queue show \
