@@ -1,0 +1,65 @@
+
+Azure Functions Core Tools
+Core Tools Version:       4.0.3971 Commit hash: d0775d487c93ebd49e9c1166d5c3c01f3c76eaaf  (64-bit)
+Function Runtime Version: 4.0.1.16815
+
+
+Functions:
+
+	simple-interest: [GET,POST] http://localhost:7071/api/simple-interest
+
+For detailed output, run func with --verbose flag.
+[40m[32minfo[39m[22m[49m: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/2 POST http://127.0.0.1:46279/AzureFunctionsRpcMessages.FunctionRpc/EventStream application/grpc -
+[40m[32minfo[39m[22m[49m: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'gRPC - /AzureFunctionsRpcMessages.FunctionRpc/EventStream'
+[2023-04-19T08:52:26.151Z] Worker process started and initialized.
+[2023-04-19T08:52:30.694Z] Host lock lease acquired by instance ID '000000000000000000000000C9406F67'.
+[2023-04-19T08:54:24.540Z] Executing 'Functions.simple-interest' (Reason='This function was programmatically called via the host APIs.', Id=c6a03f86-53f2-438f-b948-d43c2bdaa07c)
+[2023-04-19T08:54:24.744Z] Executed 'Functions.simple-interest' (Succeeded, Id=c6a03f86-53f2-438f-b948-d43c2bdaa07c, Duration=241ms)
+[2023-04-19T08:54:39.302Z] Executing 'Functions.simple-interest' (Reason='This function was programmatically called via the host APIs.', Id=b479c038-8320-4da1-9b34-f4b285b94715)
+[2023-04-19T08:54:39.306Z] Executed 'Functions.simple-interest' (Succeeded, Id=b479c038-8320-4da1-9b34-f4b285b94715, Duration=11ms)
+[40m[32minfo[39m[22m[49m: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'gRPC - /AzureFunctionsRpcMessages.FunctionRpc/EventStream'
+[40m[32minfo[39m[22m[49m: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/2 POST http://127.0.0.1:46279/AzureFunctionsRpcMessages.FunctionRpc/EventStream application/grpc - - 200 - application/grpc 458681.7441ms
+[40m[32minfo[39m[22m[49m: Grpc.AspNetCore.Server.ServerCallHandler[14]
+      Error reading message.
+      System.IO.IOException: The request stream was aborted.
+       ---> Microsoft.AspNetCore.Connections.ConnectionAbortedException: The HTTP/2 connection faulted.
+         --- End of inner exception stack trace ---
+         at System.IO.Pipelines.Pipe.GetReadResult(ReadResult& result)
+         at System.IO.Pipelines.Pipe.GetReadAsyncResult()
+         at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2.Http2MessageBody.ReadAsync(CancellationToken cancellationToken)
+         at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+         at Grpc.AspNetCore.Server.Internal.PipeExtensions.ReadStreamMessageAsync[T](PipeReader input, HttpContextServerCallContext serverCallContext, Func`2 deserializer, CancellationToken cancellationToken)
+[40m[32minfo[39m[22m[49m: Microsoft.AspNetCore.Server.Kestrel[32]
+      Connection id "0HMQ0MDJ25OTC", Request id "0HMQ0MDJ25OTC:00000001": the application completed without reading the entire request body.
+[40m[32minfo[39m[22m[49m: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/2 POST http://127.0.0.1:46279/AzureFunctionsRpcMessages.FunctionRpc/EventStream application/grpc -
+[40m[32minfo[39m[22m[49m: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'gRPC - /AzureFunctionsRpcMessages.FunctionRpc/EventStream'
+[2023-04-19T09:00:05.805Z] Worker process started and initialized.
+[2023-04-19T09:00:10.446Z] Host lock lease acquired by instance ID '000000000000000000000000C9406F67'.
+[40m[32minfo[39m[22m[49m: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'gRPC - /AzureFunctionsRpcMessages.FunctionRpc/EventStream'
+[40m[32minfo[39m[22m[49m: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/2 POST http://127.0.0.1:46279/AzureFunctionsRpcMessages.FunctionRpc/EventStream application/grpc - - 200 - application/grpc 38224.5513ms
+[40m[32minfo[39m[22m[49m: Microsoft.AspNetCore.Server.Kestrel[32]
+      Connection id "0HMQ0MDJ25OTF", Request id "0HMQ0MDJ25OTF:00000001": the application completed without reading the entire request body.
+[40m[32minfo[39m[22m[49m: Grpc.AspNetCore.Server.ServerCallHandler[14]
+      Error reading message.
+      System.IO.IOException: The request stream was aborted.
+       ---> Microsoft.AspNetCore.Connections.ConnectionAbortedException: The HTTP/2 connection faulted.
+         --- End of inner exception stack trace ---
+         at System.IO.Pipelines.Pipe.GetReadResult(ReadResult& result)
+         at System.IO.Pipelines.Pipe.GetReadAsyncResult()
+         at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2.Http2MessageBody.ReadAsync(CancellationToken cancellationToken)
+         at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+         at Grpc.AspNetCore.Server.Internal.PipeExtensions.ReadStreamMessageAsync[T](PipeReader input, HttpContextServerCallContext serverCallContext, Func`2 deserializer, CancellationToken cancellationToken)
+[40m[32minfo[39m[22m[49m: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/2 POST http://127.0.0.1:46279/AzureFunctionsRpcMessages.FunctionRpc/EventStream application/grpc -
+[40m[32minfo[39m[22m[49m: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'gRPC - /AzureFunctionsRpcMessages.FunctionRpc/EventStream'
+[2023-04-19T09:00:44.729Z] Worker process started and initialized.
+[2023-04-19T09:00:49.580Z] Host lock lease acquired by instance ID '000000000000000000000000C9406F67'.
